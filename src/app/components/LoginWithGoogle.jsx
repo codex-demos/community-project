@@ -14,9 +14,9 @@ export default function LoginWithGoogle({ getUser }) {
   return (
     <div
       onClick={handleGoogleSignIn}
-      className="px-6 py-2.5 w-48 rounded-full text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600"
+      className="cursor-pointer px-6 py-2.5  rounded-full text-white text-sm tracking-wider font-semibold bg-blue-600 hover:bg-blue-700 focus:bg-blue-800 active:bg-blue-600"
     >
-      Login With Google
+      Login
     </div>
   );
 }

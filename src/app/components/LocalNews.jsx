@@ -11,10 +11,12 @@ export default function LocalNews() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        const response = await axios.get(
-          `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${process.env.NEXT_PUBLIC_API_KEY}`
-        );
+        // const response = await axios.get(
+        //   `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${process.env.NEXT_PUBLIC_API_KEY}`
+        // );
+        const response = await axios.get('/data.json');
         setNews(response.data.articles);
+        console.log(response.data);
         setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
         console.error('Error getting news', error);
@@ -26,8 +28,8 @@ export default function LocalNews() {
   }, []);
 
   return (
-    <section>
-      <h2 className="text-center">In the Know: Local News!</h2>
+    <section className="my-40">
+      <h2 className="text-center mb-20">In the Know: Local News!</h2>
       {!isLoading ? (
         <div className="flex gap-5 flex-wrap justify-center">
           {news.map((item, index) => (

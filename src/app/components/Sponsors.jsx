@@ -4,15 +4,15 @@ import { sponsors } from './sponsorList';
 export default function Sponsors() {
   return (
     <section>
-      <h2>Meet Our Sponsors</h2>
-      <div className="flex flex-wrap justify-center gap-4 p-5">
+      <h2 className="mt-40">Meet Our Sponsors</h2>
+      <div className="flex flex-wrap justify-center gap-32 p-5">
         {sponsors.map((sponsor, index) => (
           <div
             key={index}
             className="bg-white shadow-[0_2px_18px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif] "
           >
             <Image
-              width={150}
+              width={400}
               height={150}
               src={`/sponsors/${sponsor.src}.png`}
               alt={sponsor.name + ' Logo'}

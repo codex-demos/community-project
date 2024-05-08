@@ -23,11 +23,11 @@ export default function Home() {
 
   return (
     <main>
-      <Footer />
-      <Header />
-      <Hero getUser={getUser} />
+      <Header getUser={getUser} />
+      <Hero />
       <LocalNews />
       <Sponsors />
+      <Footer />
     </main>
   );
 }

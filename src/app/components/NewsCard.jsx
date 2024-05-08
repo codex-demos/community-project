@@ -1,21 +1,8 @@
 'use client';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 
 export default function NewsCard({ article }) {
   return (
     <>
-      <Card style={{ width: '380px' }}>
-        <Card.Img variant="top" alt="news image" src={article.image} />
-        <Card.Body>
-          <Card.Title>{article.title}</Card.Title>
-          <Card.Text>{article.description}</Card.Text>
-          <Button target="_blank" href={article.url} variant="primary">
-            Read More
-          </Button>
-        </Card.Body>
-      </Card>
-
       <div className="bg-white shadow-[0_2px_18px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif] ">
         <img src={article.image} className="w-full" />
         <div className="px-4 py-6">

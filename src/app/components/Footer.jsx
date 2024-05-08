@@ -1,6 +1,4 @@
-import React from 'react';
-import Button from './Button';
 
 export default function Footer() {
-  return <Button value={'Submit The Button'} />;
+  return <p>Copyright 2024 &copy; Lewis Benson</p>;
 }

@@ -11,10 +11,12 @@ export default function LocalNews() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        // const response = await axios.get(
-        //   `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${process.env.NEXT_PUBLIC_API_KEY}`
-        // );
-        const response = await axios.get('/data.json');
+        const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${process.env.NEXT_PUBLIC_API_KEY}`;
+
+        const response = await axios.get(
+          process.env.NEXT_PUBLIC_DEV ? '/data.json' : url
+        );
+
         setNews(response.data.articles);
         console.log(response.data);
         setLoading(false); // Set loading to false after data is fetched

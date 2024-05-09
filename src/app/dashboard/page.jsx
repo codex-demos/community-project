@@ -8,13 +8,16 @@ import { auth } from '../firebaseConfig';
 import { useRouter } from 'next/navigation';
 import Posts from './components/Posts';
 import Footer from '../components/Footer';
+import AddPost from '../components/AddPost';
 
 export default function page() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [user, setUser] = useState(null);
+
   function onShow(bool) {
     setShow(bool);
   }
+
   const router = useRouter();
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -30,8 +33,9 @@ export default function page() {
   return (
     <main>
       <Header />
+      <AddPost onShow={onShow} />
       <Posts />
-      {show && <Modal onShow={onShow} />}
+      {show && <Modal isNew={true} onShow={onShow} />}
       <Sponsors />
       <Footer />
     </main>

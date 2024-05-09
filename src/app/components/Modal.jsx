@@ -1,9 +1,9 @@
 'use client';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { auth, db } from '../firebaseConfig';
 
-export default function Modal({ onShow }) {
+export default function Modal({ onShow, isNew, id }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -14,14 +14,24 @@ export default function Modal({ onShow }) {
       description,
       userId,
     };
-    await addDoc(collection(db, 'posts'), newPost);
+    const colRef = collection(db, 'posts');
+    try {
+      await addDoc(colRef, newPost);
+    } catch (error) {
+      console.error('Error adding post', error);
+    }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      console.log(title, description);
-      await addPost();
+      if (isNew) {
+        await addPost();
+      } else {
+        const docRef = doc(db, 'posts', id);
+        const ref = await updateDoc(docRef, { title, description });
+      }
+
       setTitle('');
       setDescription('');
       onShow(false);
@@ -31,7 +41,9 @@ export default function Modal({ onShow }) {
     <div className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
       <div className="w-full max-w-lg bg-white shadow-lg rounded-md p-6 relative">
         <div className="flex items-center pb-3 border-b text-black">
-          <h3 className="text-xl font-bold flex-1">Modal Title</h3>
+          <h3 className="text-xl font-bold flex-1">
+            {isNew ? 'Add a Post' : 'Edit Post'}
+          </h3>
           <svg
             onClick={() => onShow(false)}
             xmlns="http://www.w3.org/2000/svg"

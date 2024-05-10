@@ -31,13 +31,17 @@ export default function Post({ post, user }) {
           <p className="text-sm text-gray-600">{post.displayName}</p>
           <h3 className="text-xl font-semibold">{post.title}</h3>
           <p>{post.description}</p>
-          {user.uid === post.userId && (
-            <div className="flex space-x-2 mt-2">
-              <Trash handleDelete={handleDelete} />
-              <div onClick={() => setShow(true)}>
-                <Edit />
-              </div>
-            </div>
+          {user && (
+            <>
+              {user.uid === post.userId && (
+                <div className="flex space-x-2 mt-2">
+                  <Trash handleDelete={handleDelete} />
+                  <div onClick={() => setShow(true)}>
+                    <Edit />
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
         <AddComment post={post} />

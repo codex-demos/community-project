@@ -8,11 +8,12 @@ export default function Sponsors() {
       <div className="flex flex-wrap justify-center gap-32 p-5">
         {sponsors.map((sponsor, index) => (
           <div
+            style={{ width: '250px' }}
             key={index}
-            className="bg-white shadow-[0_2px_18px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif] "
+            className="bg-white shadow-[0_2px_18px_-6px_rgba(0,0,0,0.2)] rounded-lg overflow-hidden mx-auto font-[sans-serif] "
           >
             <Image
-              width={400}
+              width={250}
               height={150}
               src={`/sponsors/${sponsor.src}.png`}
               alt={sponsor.name + ' Logo'}

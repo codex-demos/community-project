@@ -43,7 +43,7 @@ export default function Header({ getUser }) {
           <ul
             className={`${
               isOpen ? 'flex' : 'hidden'
-            } lg:flex flex-col lg:flex-row gap-x-5`}
+            } lg:flex flex-col lg:flex-row gap-x-5 items-center mt-3`}
           >
             <li className="my-2 lg:my-0">
               <Link

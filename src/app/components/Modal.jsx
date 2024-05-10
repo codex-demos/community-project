@@ -10,9 +10,11 @@ export default function Modal({ onShow, isNew, id }) {
   async function addPost() {
     const userId = auth.currentUser.uid;
     const newPost = {
+      comments: [],
       title,
       description,
       userId,
+      displayName: auth.currentUser.displayName,
     };
     const colRef = collection(db, 'posts');
     try {

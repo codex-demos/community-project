@@ -15,12 +15,14 @@ export default function Posts() {
       setUser(user);
     });
   }, []);
+
+
   useEffect(() => {
     const userId = auth.currentUser?.uid;
 
     if (user) {
       const showMine = checked ? where('userId', '==', userId) : '';
-      const q = query(collection(db, 'posts'), showMine);
+      const q = query(collection(db, 'posts'));
       const unsub = onSnapshot(q, (snapshot) => {
         const todoArray = snapshot.docs.map((doc) => ({
           id: doc.id,

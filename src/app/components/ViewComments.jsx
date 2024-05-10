@@ -2,15 +2,14 @@ import React from 'react';
 
 export default function ViewComments({ post }) {
   return (
-    <div>
+    <div className="w-full lg:w-2/3 mx-auto">
       {post.comments.map((comment, index) => (
         <div
-          className="bg-white shadow-[0_2px_18px_-6px_rgba(0,0,0,0.2)] w-50 mx-auto  rounded-lg overflow-hidden  font-[sans-serif]"
+          className="bg-white border-t border-gray-200 px-4 py-3 first:pt-0"
           key={index}
         >
-          <input type="file" name="" id="" />
-          <p>{comment.displayName}</p>
-          <p>{comment.text}</p>
+          <p className="font-semibold">{comment.displayName}</p>
+          <p className="text-gray-600 text-sm">{comment.text}</p>
         </div>
       ))}
     </div>

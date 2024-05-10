@@ -16,7 +16,6 @@ export default function Posts() {
     });
   }, []);
 
-
   useEffect(() => {
     const userId = auth.currentUser?.uid;
 
@@ -34,7 +33,7 @@ export default function Posts() {
     }
   }, [user]);
   return (
-    <section className="flex w-100 flex-column gap-3">
+    <section className="flex w-100 flex-column">
       {posts.map((post) => (
         <Post key={post.id} user={user} post={post} />
       ))}

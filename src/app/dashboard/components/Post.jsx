@@ -1,17 +1,19 @@
+'use client';
 import AddComment from '@/app/components/AddComment';
 import Modal from '@/app/components/Modal';
 import ViewComments from '@/app/components/ViewComments';
-import { auth, db } from '@/app/firebaseConfig';
 import Edit from '@/app/svgs/Edit';
 import Trash from '@/app/svgs/Trash';
-import { deleteDoc, doc } from 'firebase/firestore';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Accordion } from 'react-bootstrap';
 
 export default function Post({ post, user }) {
   const [show, setShow] = useState(false);
+
   function onShow(bool) {
     setShow(bool);
   }
+
   async function handleDelete() {
     const postRef = doc(db, 'posts', post.id);
     try {
@@ -19,29 +21,37 @@ export default function Post({ post, user }) {
     } catch (error) {
       console.error('error deleting doc', error);
     }
-    // !BUG
-    // TODO Fix bug with username being current user
-    // !BUG
   }
+
   return (
     <>
       {show && <Modal id={post.id} onShow={onShow} isNew={false} />}
-      <div className="bg-white shadow-[0_2px_18px_-6px_rgba(0,0,0,0.2)] w-75 mt-20 mx-auto  rounded-lg overflow-hidden  font-[sans-serif] ">
-        <p>{post.displayName}</p>
-        {console.log(post.displayName)}
-        <div className="px-4 py-6">
-          <h3 className="mt-2">{post.title}</h3>
+      <div className="bg-white border border-gray-200 shadow-custom w-full lg:w-2/3 mx-auto my-4 rounded-lg overflow-hidden font-sans">
+        <div className="px-4 py-4">
+          <p className="text-sm text-gray-600">{post.displayName}</p>
+          <h3 className="text-xl font-semibold">{post.title}</h3>
           <p>{post.description}</p>
-          {user.uid === post.userId && <Trash handleDelete={handleDelete} />}
           {user.uid === post.userId && (
-            <div onClick={() => setShow(true)}>
-              <Edit />
+            <div className="flex space-x-2 mt-2">
+              <Trash handleDelete={handleDelete} />
+              <div onClick={() => setShow(true)}>
+                <Edit />
+              </div>
             </div>
           )}
         </div>
+        <AddComment post={post} />
+        <div className="w-full lg:w-2/3 mx-auto">
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Comments</Accordion.Header>
+              <Accordion.Body>
+                <ViewComments post={post} />
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </div>
       </div>
-      <AddComment post={post} />
-      <ViewComments post={post} />
     </>
   );
 }
